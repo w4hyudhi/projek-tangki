@@ -10,7 +10,7 @@ use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Helpers\helpers;
-
+use App\Http\Resources\TransactionUserResponse;
 
 class TransactionController extends Controller
 {
@@ -45,10 +45,11 @@ class TransactionController extends Controller
         if($status)
             $transaction->where('status', $status);
 
-        return ResponseFormatter::success(
-            $transaction->paginate($limit),
-            'Data list transaksi berhasil diambil'
-        );
+        // return ResponseFormatter::success(
+        //     $transaction->paginate($limit),
+        //     'Data list transaksi berhasil diambil'
+        // );
+        return TransactionUserResponse::collection($transaction->get());
     }
 
     public function checkout(Request $request)
