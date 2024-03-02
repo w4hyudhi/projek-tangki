@@ -26,10 +26,7 @@ class TransactionController extends Controller
             $transaction = Transaction::with(['status_booking','tangki.user','address'])->find($id);
 
             if($transaction)
-                return ResponseFormatter::success(
-                    $transaction,
-                    'Data transaksi berhasil diambil'
-                );
+            return new TransactionUserResponse($transaction);
             else
                 return ResponseFormatter::error(
                     null,
