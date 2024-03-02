@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+
+use Faker\Guesser\Name;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+       UserSedder::class;
         // \App\Models\User::factory(10)->create();
     }
 }
