@@ -18,8 +18,8 @@ class AddresResponse extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'address' => $this->address,
-            'latitude' => $this->latitude,
-            'longitude' => $this->longitude,
+            'latitude' => doubleval($this->latitude),
+            'longitude' => doubleval($this->longitude),
         ];
 
         return $data;
