@@ -125,7 +125,7 @@ class TransactionController extends Controller
             if($fcm_token){
                 $data = [
                     'title' => 'Update Pesanan',
-                    'description' => 'Anda Air Bersaih anda pada '.$transaction->tangki->name,
+                    'description' => 'Pesana Air Bersaih anda pada '.$transaction->tangki->name.' telah diupdate menjadi '.$transaction->status,
                     'order_id' => $transaction->id,
                     'image' => '',
                     'type'=> 'order_status'
