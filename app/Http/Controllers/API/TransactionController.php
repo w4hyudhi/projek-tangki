@@ -21,6 +21,7 @@ class TransactionController extends Controller
         $id = $request->input('id');
         $limit = $request->input('limit', 6);
         $status = $request->input('status');
+        $active = $request->input('active');
 
         if($id)
         {
@@ -43,6 +44,8 @@ class TransactionController extends Controller
         if($status)
             $transaction->where('status', $status);
 
+            if($active)
+            $transaction->whereNotIn('status', ['Pesanan Dibatalkan', 'Pesanan Gagal', 'Pesanan Selesai']);
         // return ResponseFormatter::success(
         //     $transaction->paginate($limit),
         //     'Data list transaksi berhasil diambil'
