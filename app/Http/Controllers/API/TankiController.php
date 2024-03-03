@@ -83,10 +83,7 @@ class TankiController extends Controller
             $product = Tangki::active()->with(['user','review'])->find($id);
 
             if($product)
-                return ResponseFormatter::success(
-                    $product,
-                    'Data tangki berhasil diambil'
-                );
+                return TangkiResponse::make($product);
             else
                 return ResponseFormatter::error(
                     null,
