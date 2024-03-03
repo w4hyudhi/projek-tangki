@@ -119,6 +119,23 @@ class TransactionController extends Controller
             ]);
             $transaction = Transaction::with(['status_booking','tangki.user','address'])->find($request->id);
 
+
+        $fcm_token =$transaction->user->fcm_token;
+        try{
+            if($fcm_token){
+                $data = [
+                    'title' => 'Update Pesanan',
+                    'description' => 'Anda Air Bersaih anda pada '.$transaction->tangki->name,
+                    'order_id' => $transaction->id,
+                    'image' => '',
+                    'type'=> 'order_status'
+                ];
+                Helpers::send_push_notif_to_device($fcm_token, $data);
+            }
+        } catch(\Exception $e){
+
+        }
+
             if($transaction)
                 return ResponseFormatter::success(
                     $transaction,
