@@ -37,7 +37,8 @@ class TransactionUserResponse extends JsonResource
                 'longitude' => doubleval($this->address->longitude),
                 'created_at' => $this->created_at,
                 'updated_at' => $this->updated_at,
-                 'status_booking' => StatusBookingResource::collection($this->status_booking),
+                'status_booking' => StatusBookingResource::collection($this->status_booking),
+                'review' => $this->review,
             ];
 
 

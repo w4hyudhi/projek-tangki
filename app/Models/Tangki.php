@@ -17,6 +17,11 @@ class Tangki extends Model
     {
       return $this->belongsTo(User::class);
     }
+
+    public function review()
+    {
+        return $this->hasMany(Review::class, 'tangki_id', 'id');
+    }
     public function scopeActive($query)
     {
         return $query->where('request_status', '=', '1');
@@ -26,6 +31,9 @@ class Tangki extends Model
     {
         return config('app.url') .'/'. $url;
     }
+
+
+
 
 }
 

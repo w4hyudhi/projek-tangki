@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Helpers\helpers;
 use App\Http\Resources\TransactionUserResponse;
+use App\Models\Review;
 
 class TransactionController extends Controller
 {
@@ -23,7 +24,7 @@ class TransactionController extends Controller
 
         if($id)
         {
-            $transaction = Transaction::with(['status_booking','tangki.user','address'])->find($id);
+            $transaction = Transaction::with(['status_booking','tangki.user','address','review'])->find($id);
 
             if($transaction)
             return new TransactionUserResponse($transaction);
@@ -187,6 +188,32 @@ class TransactionController extends Controller
                     'Data transaksi tidak ada',
                     404
                 );
+        }
+
+        public function create_review(Request $request)
+        {
+
+            $request->validate([
+                'id' => ['required'],
+                'comments' => ['required'],
+                'star' => ['required'],
+            ]);
+            $transaction = Transaction::find($request->id);
+
+
+    if (Review::where('transaction_id', $request->id)->exists()) {
+        return ResponseFormatter::error(null, 'Review for this transaction already exists', 400);
+    }
+
+            $review = Review::create([
+                'transaction_id' => $request->id,
+                'user_id' => $transaction->id,
+                'tangki_id' => $transaction->tangki_id,
+                'comments' => $request->comments,
+                'star' => $request->star,
+            ]);
+
+            return ResponseFormatter::success($review, 'Review berhasil ditambahkan');
         }
 
 

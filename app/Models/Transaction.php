@@ -32,4 +32,9 @@ class Transaction extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    public function review()
+    {
+        return $this->hasOne(Review::class, 'transaction_id', 'id');
+    }
+
 }

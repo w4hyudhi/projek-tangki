@@ -78,7 +78,7 @@ class TankiController extends Controller
 
         if($id)
         {
-            $product = Tangki::active()->with(['user'])->find($id);
+            $product = Tangki::active()->with(['user','review'])->find($id);
 
             if($product)
                 return ResponseFormatter::success(
@@ -93,7 +93,7 @@ class TankiController extends Controller
                 );
         }
 
-        $tangki = Tangki::active()->with(['user']);
+        $tangki = Tangki::active()->with(['user','review']);
         if($name)
         $tangki->where('name', 'like', '%' . $name . '%');
         if($type)
