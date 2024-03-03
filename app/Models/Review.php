@@ -11,4 +11,9 @@ class Review extends Model
     protected $fillable = [
         'user_id','transaction_id', 'tangki_id','star', 'comments'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

@@ -24,7 +24,7 @@ class TransactionController extends Controller
 
         if($id)
         {
-            $transaction = Transaction::with(['status_booking','tangki.user','address','review'])->find($id);
+            $transaction = Transaction::with(['status_booking','tangki.user','address','review.user'])->find($id);
 
             if($transaction)
             return new TransactionUserResponse($transaction);
@@ -38,7 +38,7 @@ class TransactionController extends Controller
 
 
 
-        $transaction = Transaction::with(['status_booking','tangki.user','address'])->where('user_id', Auth::user()->id);
+        $transaction = Transaction::with(['status_booking','tangki.user','address','review.user'])->where('user_id', Auth::user()->id);
 
         if($status)
             $transaction->where('status', $status);
@@ -207,7 +207,7 @@ class TransactionController extends Controller
 
             $review = Review::create([
                 'transaction_id' => $request->id,
-                'user_id' => $transaction->id,
+                'user_id' => $transaction->user_id,
                 'tangki_id' => $transaction->tangki_id,
                 'comments' => $request->comments,
                 'star' => $request->star,

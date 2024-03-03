@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Review;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TransactionUserResponse extends JsonResource
@@ -38,7 +39,10 @@ class TransactionUserResponse extends JsonResource
                 'created_at' => $this->created_at,
                 'updated_at' => $this->updated_at,
                 'status_booking' => StatusBookingResource::collection($this->status_booking),
-                'review' => $this->review,
+
+                // 'review' => ReviewResponse::collection(Review::where('transaction_id', $this->id)->get()),
+                // 'review' => ReviewResponse::collection($this->review),
+                'review' =>new ReviewResponse($this->review),
             ];
 
 
