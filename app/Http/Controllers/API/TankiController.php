@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Helpers\ResponseFormatter;
+use App\Http\Resources\DriverResponse;
+use App\Http\Resources\TangkiResponse;
 use App\Models\Tangki;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -100,9 +102,12 @@ class TankiController extends Controller
         $tangki->where('type', $type);
         if($status)
             $tangki->where('status', $status);
-            return ResponseFormatter::success(
-                $tangki->get(),
-                'Data list tangki berhasil diambil'
-            );
+
+            return TangkiResponse::collection($tangki->paginate($limit));
+
+            // return ResponseFormatter::success(
+            //     $tangki->get(),
+            //     'Data list tangki berhasil diambil'
+            // );
     }
 }
