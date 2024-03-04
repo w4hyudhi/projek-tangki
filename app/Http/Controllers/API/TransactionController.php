@@ -44,8 +44,8 @@ class TransactionController extends Controller
         if($status)
             $transaction->where('status', $status);
 
-            if($active)
-            $transaction->whereNotIn('status', ['Pesanan Dibatalkan', 'Pesanan Gagal', 'Pesanan Selesai']);
+        if($active)
+        $transaction->whereNotIn('status', ['Pesanan Dibatalkan', 'Pesanan Gagal', 'Pesanan Selesai']);
         // return ResponseFormatter::success(
         //     $transaction->paginate($limit),
         //     'Data list transaksi berhasil diambil'
@@ -63,8 +63,6 @@ class TransactionController extends Controller
 
             // 'status' => 'required|in:PENDING,SUCCESS,CANCELLED,FAILED,SHIPPING,SHIPPED',
         ]);
-
-
 
         $transaction = Transaction::create([
             'user_id' => Auth::user()->id,

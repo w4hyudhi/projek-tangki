@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pendataan Pemilih</title>
-    <link rel="icon" href="{!! asset('images/logo.jpg') !!}"/>
+    <title>Admin Dashboard</title>
+    <link rel="icon" href="{!! asset('images/logo.png') !!}"/>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -20,7 +20,7 @@
 <div class="login-box">
     <div class="login-logo">
         <a href="/">
-            <img src="{{ asset('images/logo.jpg') }}" alt="{{ config('app.name', 'Laravel') }}" class="logo" height="100" />
+            <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name', 'Laravel') }}" class="logo" height="100" />
         </a>
     </div>
     <!-- /.login-logo -->
