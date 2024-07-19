@@ -14,7 +14,6 @@ class Helpers
             "content-type: application/json"
         );
 
-
         if(isset($data['message'])){
             $message = $data['message'];
         }else{
