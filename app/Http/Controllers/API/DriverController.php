@@ -206,14 +206,14 @@ $earningsThisMonth = DB::table('transactions')
         ->count();
 
     return response()->json([
-        'total_earnings' => $totalEarnings,
-        'earnings_today' => $earningsToday,
-        'earnings_this_week' => $earningsThisWeek,
-        'earnings_this_month' => $earningsThisMonth,
-        'total_transactions' => $totalTransactions,
-        'transactions_today' => $transactionsToday,
-        'transactions_this_week' => $transactionsThisWeek,
-        'transactions_this_month' => $transactionsThisMonth,
+        'total_earnings' => (int) $totalEarnings,
+        'earnings_today' => (int) $earningsToday,
+        'earnings_this_week' => (int) $earningsThisWeek,
+        'earnings_this_month' => (int) $earningsThisMonth,
+        'total_transactions' => (int) $totalTransactions,
+        'transactions_today' => (int) $transactionsToday,
+        'transactions_this_week' => (int) $transactionsThisWeek,
+        'transactions_this_month' => (int) $transactionsThisMonth,
     ]);
     }
 }
