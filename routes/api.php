@@ -40,6 +40,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('transactions', [TransactionController::class, 'all']);
         Route::post('checkout', [TransactionController::class, 'checkout']);
         Route::post('review', [TransactionController::class, 'create_review']);
+        Route::get('onlines', [TankiController::class, 'getOnlineDrivers']);
     });
 
     Route::prefix('driver')->group(function () {

@@ -73,7 +73,7 @@ class TankiController extends Controller
     public function all(Request $request)
     {
         $id = $request->input('id');
-        $limit = $request->input('limit', 6);
+        $limit = $request->input('limit', 20);
         $name = $request->input('name');
         $type = $request->input('type');
         $status = $request->input('status');
@@ -107,4 +107,12 @@ class TankiController extends Controller
             //     'Data list tangki berhasil diambil'
             // );
     }
+
+    public function getOnlineDrivers(Request $request)
+    {
+        $tangki = Tangki::active()->with(['user','review'])->where('active',1)->get();
+        return TangkiResponse::collection($tangki);
+    }
+
+
 }
