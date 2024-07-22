@@ -80,7 +80,7 @@ class TankiController extends Controller
 
         if($id)
         {
-            $product = Tangki::active()->with(['user','review'])->find($id);
+            $product = Tangki::active()->with(['user','review','transaction'])->find($id);
 
             if($product)
                 return TangkiResponse::make($product);
@@ -92,7 +92,7 @@ class TankiController extends Controller
                 );
         }
 
-        $tangki = Tangki::active()->with(['user','review']);
+        $tangki = Tangki::active()->with(['user','review','transaction']);
         if($name)
         $tangki->where('name', 'like', '%' . $name . '%');
         if($type)
@@ -100,17 +100,16 @@ class TankiController extends Controller
         if($status)
             $tangki->where('status', $status);
 
-            return TangkiResponse::collection($tangki->paginate($limit));
+        // return $tangki->get();
 
-            // return ResponseFormatter::success(
-            //     $tangki->get(),
-            //     'Data list tangki berhasil diambil'
-            // );
+        return TangkiResponse::collection($tangki->paginate($limit));
+
+
     }
 
     public function getOnlineDrivers(Request $request)
     {
-        $tangki = Tangki::active()->with(['user','review'])->where('active',1)->get();
+        $tangki = Tangki::active()->with(['user','review',''])->where('active',1)->get();
         return TangkiResponse::collection($tangki);
     }
 

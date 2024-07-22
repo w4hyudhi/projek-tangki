@@ -25,6 +25,7 @@ class TangkiResponse extends JsonResource
                 'photo_path' => $this->photo_path,
                 'user' => UserResponse::make($this->user),
                 'review' => ReviewResponse::collection($this->review),
+                'transaction' => TransactionHistoryResponse::collection($this->transaction),
 
 
 

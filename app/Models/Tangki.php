@@ -32,6 +32,12 @@ class Tangki extends Model
         return config('app.url') .'/'. $url;
     }
 
+    public function transaction()
+    {
+        return $this->hasMany(Transaction::class, 'tangki_id', 'id')
+            ->whereNotIn('status', ['Pesanan Dibatalkan', 'Pesanan Gagal', 'Pesanan Selesai']);
+    }
+
 
 
 
