@@ -19,17 +19,13 @@ class TangkiResponse extends JsonResource
                 'name' => $this->name,
                 'type' => $this->type,
                 'price' => $this->price,
-                'status' => $this->status,
+                'status' => $this->active == 1 ? 'Online' : 'Offline',
                 'scedule' => $this->scedule,
                 'description' => $this->description,
                 'photo_path' => $this->photo_path,
                 'user' => UserResponse::make($this->user),
                 'review' => ReviewResponse::collection($this->review),
                 'transaction' => TransactionHistoryResponse::collection($this->transaction),
-
-
-
-
             ];
 
             return $data;
