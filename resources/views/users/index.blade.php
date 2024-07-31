@@ -81,11 +81,11 @@
                                             <div class="modal-body">
 
 
-                                                @if($user->photo_path)
-                                                <div class="mb-3">
-                                                    <img src="{{ $user->photo_path}}" alt="User Photo" class="img-fluid" style="max-width: 50%;">
+                                                <div class="mb-3 text-center">
+                                                    @if($user->photo_path)
+                                                        <img src="{{ $user->photo_path }}" alt="User Photo" class="img-fluid" style="max-width: 50%;">
+                                                    @endif
                                                 </div>
-                                                @endif
 
                                                 <div class="input-group mb-3">
                                                     <input type="file" name="photo_path" class="form-control @error('photo_path') is-invalid @enderror">
