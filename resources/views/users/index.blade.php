@@ -199,7 +199,10 @@
                                             </div>
                                             <div class="modal-footer justify-content-between">
                                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                              <a href="{{ route('users.verifikasi',$user->id) }}"class="btn btn-secondary">Verifikasi Email</a>
+                                              @if (!$user->email_verified_at)
+                                              <a href="{{ route('users.verifikasi',$user->id) }}"class="btn btn-primary">Verifikasi User</a>
+                                              @endif
+
                                               <button  type="submit" class="btn btn-primary">Simpan</button>
                                             </div>
                                             </form>
