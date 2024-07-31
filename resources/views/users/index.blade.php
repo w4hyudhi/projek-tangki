@@ -83,7 +83,7 @@
 
                                                 @if($user->photo_path)
                                                 <div class="mb-3">
-                                                    <img src="{{ $user->photo_path}}" alt="User Photo" class="img-fluid">
+                                                    <img src="{{ $user->photo_path}}" alt="User Photo" class="img-fluid" style="max-width: 100%;">
                                                 </div>
                                                 @endif
 
