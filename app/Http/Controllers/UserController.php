@@ -60,4 +60,10 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('users.index')->with('success', 'User deleted.');
     }
+
+    public function verifikasi(User $user)
+    {
+        $user->update(['email_verified_at' => now()]);
+        return redirect()->route('users.index')->with('success', 'User verified.');
+    }
 }

@@ -23,6 +23,7 @@ class TransactionResponse extends JsonResource
                 'photo_path' => $this->user->photo_path,
                 'profile_photo_url' => $this->user->profile_photo_url,
                 'phone' => $this->user->phone,
+                'verified' => $this->user->email_verified_at ? true : false,
                 'status' => $this->status,
                 'payment' => $this->payment,
                 'description' => $this->description,

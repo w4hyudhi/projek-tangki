@@ -104,7 +104,6 @@ class DriverController extends Controller
 
     function profile(Request $request){
         $user = Auth::user();
-        // $tangki = Tangki::where('user_id', $user->id)->first();
         return DriverResponse::make($user);
     }
 

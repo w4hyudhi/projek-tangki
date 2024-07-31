@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::post('user/store', [\App\Http\Controllers\UserController::class, 'store'])->name('users.store');
     Route::put('user/{user}/update', [\App\Http\Controllers\UserController::class, 'update'])->name('users.update');
     Route::delete('user/{user}/destroy', [\App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy');
+    Route::get('user/{user}/verifikasi', [\App\Http\Controllers\UserController::class, 'verifikasi'])->name('users.verifikasi');
 
 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');

@@ -26,6 +26,7 @@ class User extends Authenticatable
         'password',
         'photo_path',
         'fcm_token',
+        'email_verified_at',
     ];
 
     /**

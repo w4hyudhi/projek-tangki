@@ -21,6 +21,7 @@ class UserResponse extends JsonResource
             'username' => $this->username,
             'phone' => $this->phone,
             'email' => $this->email,
+            'verified' => $this->email_verified_at ? true : false,
             'photo_path' => $this->photo_path,
         ];
 

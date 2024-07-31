@@ -22,18 +22,21 @@
 
 
                     <div class="card">
-                        <div class="card-header">
+                        {{-- <div class="card-header">
                             <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modal-lg">
                                 <i class="fas fa-plus-circle"></i> Tambah Admin
                               </button>
-                            </div>
+                            </div> --}}
                         <div class="card-body p-0">
 
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th>Name</th>
+                                        <th>Phone Number</th>
                                         <th>Email</th>
+                                        <th>Verifikasi</th>
+
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -41,9 +44,16 @@
                                 @foreach($users as $user)
                                     <tr>
                                         <td>{{ $user->name }}</td>
+                                        <td>{{ $user->phone }}</td>
                                         <td>{{ $user->email }}</td>
+                                        <td>
+                                            @if ($user->email_verified_at)
+                                                <span class="badge badge-success">Verified</span>
+                                            @else
+                                                <span class="badge badge-danger">Not Verified</span>
+                                            @endif
                                         <td class="text-right">
-                                            @if (Auth::user()->role == 'admin')
+                                            {{-- @if (Auth::user()->role == 'admin') --}}
                                             @if ($user->id != Auth::user()->id)
                                             <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#modal-lg{{$user->id}}"><i class="fas fa-edit"></i></a>
                                             <form action="{{ route('users.destroy',$user->id) }}" method="POST" class="d-inline">
@@ -52,7 +62,7 @@
                                                 <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                             </form>
                                             @endif
-                                            @endif
+                                            {{-- @endif --}}
                                         </td>
                                     </tr>
 
@@ -69,9 +79,32 @@
                                                 @csrf
                                                 @method('PUT')
                                             <div class="modal-body">
+
+
+                                                @if($user->photo_path)
+                                                <div class="mb-3">
+                                                    <img src="{{ $user->photo_path}}" alt="User Photo" class="img-fluid">
+                                                </div>
+                                                @endif
+
+                                                <div class="input-group mb-3">
+                                                    <input type="file" name="photo_path" class="form-control @error('photo_path') is-invalid @enderror">
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-image"></span>
+                                                        </div>
+                                                    </div>
+                                                    @error('photo_path')
+                                                    <span class="error invalid-feedback">
+                                                        {{ $message }}
+                                                    </span>
+                                                    @enderror
+                                                </div>
+
+
                                                 <div class="input-group mb-3">
                                                     <input type="text" name="name" value="{{ old('name',$user->name) }}" class="form-control @error('name') is-invalid @enderror"
-                                                           placeholder="{{ __('Name') }}" required autocomplete="name" autofocus >
+                                                           placeholder="{{ __('Name') }}" required autocomplete="name" autofocus>
                                                     <div class="input-group-append">
                                                         <div class="input-group-text">
                                                             <span class="fas fa-user"></span>
@@ -83,6 +116,42 @@
                                                     </span>
                                                     @enderror
                                                 </div>
+
+                                                <div class="input-group mb-3">
+                                                    <input type="text" name="username" value="{{ old('username',$user->username) }}" class="form-control @error('username') is-invalid @enderror"
+                                                           placeholder="{{ __('Username') }}" required autocomplete="username" autofocus>
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-user"></span>
+                                                        </div>
+                                                    </div>
+                                                    @error('username')
+                                                    <span class="error invalid-feedback">
+                                                        {{ $message }}
+                                                    </span>
+                                                    @enderror
+                                                </div>
+
+
+
+                                                <div class="input-group mb-3">
+                                                    <input type="text" name="phone" value="{{ old('phone',$user->phone) }}" class="form-control @error('phone') is-invalid @enderror"
+                                                           placeholder="{{ __('phone') }}" required autocomplete="phone" autofocus >
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-phone"></span>
+                                                        </div>
+                                                    </div>
+                                                    @error('phone')
+                                                    <span class="error invalid-feedback">
+                                                        {{ $message }}
+                                                    </span>
+                                                    @enderror
+                                                </div>
+
+
+
+
 
                                                 <div class="input-group mb-3">
                                                     <input type="email" name="email" value="{{ old('email',$user->email) }}" class="form-control @error('email') is-invalid @enderror"
@@ -125,9 +194,12 @@
                                                     </div>
                                                 </div>
 
+
+
                                             </div>
                                             <div class="modal-footer justify-content-between">
                                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                              <a href="{{ route('users.verifikasi',$user->id) }}"class="btn btn-secondary">Verifikasi Email</a>
                                               <button  type="submit" class="btn btn-primary">Simpan</button>
                                             </div>
                                             </form>
